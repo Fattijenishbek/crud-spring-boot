@@ -2,6 +2,7 @@ package com.example.cscrudapp.controllers;
 
 import com.example.cscrudapp.models.Post;
 import com.example.cscrudapp.repo.PostRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,5 +61,15 @@ public class BlogController {
         post.ifPresent(result::add);
         model.addAttribute("post", result);
         return  "blog-edit";
+    }
+
+    @PostMapping("/blog/{id}/edit")
+    public String blogPostUdate(@PathVariable(value = "id") long id,@RequestParam String title, @RequestParam String anons, @RequestParam String full_text, Model model) throws NotFoundException {
+        Post post = postRepository.findById(id).orElseThrow(()->new NotFoundException("id not found"+id));
+        post.setTitle(title);
+        post.setAnons(anons);
+        post.setFull_text(full_text);
+        postRepository.save(post);
+        return "redirect:/blog";
     }
 }
