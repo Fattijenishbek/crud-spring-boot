@@ -12,5 +12,10 @@ public class MainController {
         model.addAttribute("title", "Main Page");
         return "home";
     }
+    @GetMapping("/about")
+    public String about(Model model) {
+        model.addAttribute("title", "Main Page");
+        return "home";
+    }
 
 }
