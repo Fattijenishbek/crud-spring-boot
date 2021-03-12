@@ -9,9 +9,9 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="container mt-5">
     <div th:each="el : ${post}" class="alert alert-info mt-2">
-        <h1 th:text="${el.title}"></h1>
+        <h1 th:text="${el.title}"/>
         <p th:text="${el.full_text}"></p>
-        <p th:text="${el.views}"></p>
+        <p><b>Views:</b><span th:text="${el.views}"/></p>
         <a th:href="'/blog/'+ ${el.id}+'/edit'" class="btn btn-warning">Edit</a>
         <a th:href="'/blog/'+ ${el.id} +'/remove'" class="btn btn-warning">Remove</a>
     </div>
